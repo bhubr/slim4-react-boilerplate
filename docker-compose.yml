@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  react:
+    build: ./client
+    volumes:
+      - ./client/src:/app/src
+      - ./client/dist:/app/dist
+    environment:
+      NODE_ENV: development
+
+  slim:
+    image: ulsmith/alpine-apache-php7
+    volumes:
+      - ./server:/app
+      - ./client/dist:/client
+    ports:
+      - "8000:80"
